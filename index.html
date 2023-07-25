@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>检查应用程序是否已安装</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    div {
+      margin-top: 80px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 距离顶部200px -->
+  <div></div>
+  <Button
+    onclick="openAppOrRedirectToStore('agoo://com.lang.art/thirdpush?id=33423434','https://play.google.com/store/apps/details?id=com.lang.art')">检查应用程序是否已安装Android</button>
+  <Button
+    onclick="openAppOrRedirectToStore('heartX://','https://apps.apple.com/hk/app/heartx/id1662081886')">检查应用程序是否已安装iOS</button>
+  <script>
+
+    function openAppOrRedirectToStore(appUrl, storeUrl) {
+      var isMobile = {
+        Android: function () {
+          return navigator.userAgent.match(/Android/i);
+        },
+        iOS: function () {
+          return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+        },
+      };
+
+      // 打开 app
+      window.location.href = appUrl;
+
+      debugger;
+      setTimeout(function () {
+        // 检查是否仍在当前页面，如果是，说明没有成功打开 APP，需要跳转到商店
+        if (!document.hidden) {
+          if (isMobile.Android()) {
+            // Android 的处理逻辑
+            window.location.href = storeUrl;
+          } else if (isMobile.iOS()) {
+            // iOS 的处理逻辑
+            window.location.href = storeUrl;
+          }
+        } else {
+          // App存在
+          debugger;
+        }
+      }, 2000);
+    }
+  </script>
+</body>
+
+</html>
